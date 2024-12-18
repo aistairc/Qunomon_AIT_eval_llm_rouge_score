@@ -1,0 +1,95 @@
+{
+  "name": "eval_llm_rouge_score",
+  "description": "MLFlowを使用して、LLMモデルでテキストに対してレジュメ生成し、その生成されたテキストの品質を評価します。LLM評価基準を用いて、テキストのROUGEスコアを計算し、テキストの質を数値化します。",
+  "source_repository": "https://github.com/aistairc/Qunomon_AIT_eval_llm_rouge_score",
+  "version": "1.0",
+  "quality": "https://ait-hub.pj.aist.go.jp/ait-hub/api/0.0.1/qualityDimensions/機械学習品質マネジメントガイドライン第三版/C-1機械学習モデルの正確性",
+  "keywords": [
+    "LLM",
+    "MLFlow",
+    "ROUGE"
+  ],
+  "references": [],
+  "licenses": [
+    "Apache License Version 2.0"
+  ],
+  "inventories": [
+    {
+      "name": "generate_data",
+      "type": "dataset",
+      "description": "説明とレジュメのデータセット \nJSON形式{inputs:array, references:array}\n例：{inputs: [Artificial intelligence is rapidly transforming industries.], references: [AI is revolutionizing industries by enhancing data processing and decision-making.]",
+      "requirement": {
+        "format": [
+          "json"
+        ]
+      }
+    },
+    {
+      "name": "llm_model_dir",
+      "type": "model",
+      "description": "事前にトレーニング済みの大規模言語モデルと、そのモデルの設定ファイルを保存したディレクトリ\n 例:T5, GPT-3\n モデルファイルは、config.json, model.safetensors, generation_config.json, special_tokens_map.json, tokenizer_config.json, tokenizer.jsonを含む",
+      "requirement": {
+        "format": [
+          "ALL"
+        ]
+      }
+    }
+  ],
+  "parameters": [],
+  "report": {
+    "measures": [
+      {
+        "name": "ROUGE1_Score",
+        "type": "float",
+        "description": "計算されたROUGE1スコア",
+        "structure": "single",
+        "min": "0"
+      },
+      {
+        "name": "ROUGE2_Score",
+        "type": "float",
+        "description": "計算されたROUGE2スコア",
+        "structure": "single",
+        "min": "0"
+      },
+      {
+        "name": "ROUGE_L_Score",
+        "type": "float",
+        "description": "計算されたROUGE_Lスコア",
+        "structure": "single",
+        "min": "0"
+      },
+      {
+        "name": "ROUGE_W_Score",
+        "type": "float",
+        "description": "計算されたROUGE_Wスコア",
+        "structure": "single",
+        "min": "0"
+      },
+      {
+        "name": "ROUGE_S_Score",
+        "type": "float",
+        "description": "計算されたROUGE_Sスコア",
+        "structure": "single",
+        "min": "0"
+      }
+    ],
+    "resources": [
+      {
+        "name": "rouge_score_table",
+        "type": "table",
+        "description": "ROUGEスコアが最も低い10セットのデータサンプル"
+      }
+    ]
+  },
+  "downloads": [
+    {
+      "name": "Log",
+      "description": "AIT実行ログ"
+    },
+    {
+      "name": "MLFlow_table",
+      "description": "MLFlow実行結果CSV"
+    }
+  ]
+}
